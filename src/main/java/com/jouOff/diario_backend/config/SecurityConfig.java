@@ -3,9 +3,13 @@ package com.jouOff.diario_backend.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 
 @Configuration
 public class SecurityConfig {
@@ -24,21 +28,28 @@ public class SecurityConfig {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-        return request -> {
-            var corsConfig = new org.springframework.web.cors.CorsConfiguration();
-            corsConfig.setAllowedOrigins(java.util.List.of("http://localhost:5173"));
-            corsConfig.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-            corsConfig.setAllowedHeaders(java.util.List.of("*"));
-            corsConfig.setAllowCredentials(true);
+        CorsConfiguration Configuration = new CorsConfiguration();
+            
+            Configuration.setAllowedOrigins(java.util.List.of("http://localhost:5173"));
+            Configuration.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+            Configuration.setAllowedHeaders(java.util.List.of("*"));
+            Configuration.setAllowCredentials(true);
 
             UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-            source.registerCorsConfiguration("/**", corsConfig);
-            return corsConfig;
-        };
-    }
+            source.registerCorsConfiguration("/**", Configuration);
+            return source;
+
+        }
+
+    @Bean 
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }    
+
+}
 
 
     
 
 
-}
+
