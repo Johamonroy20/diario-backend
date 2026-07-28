@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegistroRequest {
     
-    @NotBlank(message = "El Nombre es Obligatorio")
+    @NotBlank(message = "El nombre es Obligatorio")
     private String nombreCompleto;
 
     @NotBlank(message = "El email es obligatorio")
