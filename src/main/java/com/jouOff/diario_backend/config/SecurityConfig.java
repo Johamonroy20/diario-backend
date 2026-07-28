@@ -20,7 +20,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/ping").permitAll()
+                        .requestMatchers("/api/ping", "/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 );
         return http.build();
