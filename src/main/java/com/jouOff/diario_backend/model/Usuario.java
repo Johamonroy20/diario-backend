@@ -19,7 +19,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "nombre-completo", nullable = false)
+    @Column (name = "nombre_completo", nullable = false)
     private String nombreCompleto;
 
     @Column(nullable = false, unique = true)
@@ -28,6 +28,6 @@ public class Usuario {
     @Column(nullable = false)
     private String password;
 
-    @Column(name = "fecha-registro", nullable = false)
+    @Column(name = "fecha_registro", nullable = false)
     private LocalDateTime fechaRegistro;
 }
