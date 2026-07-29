@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jouOff.diario_backend.dto.LoginRequest;
+import com.jouOff.diario_backend.dto.LoginResponse;
 import com.jouOff.diario_backend.dto.RegistroRequest;
 import com.jouOff.diario_backend.model.Usuario;
 import com.jouOff.diario_backend.service.AuthService;
@@ -41,5 +43,16 @@ public class AuthController {
             ));
         }
     }
+     @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
+        try {
+            LoginResponse response = authService.login(request);
+            return ResponseEntity.ok(response);
 
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of(
+                    "error", e.getMessage()
+            ));
+        }
+    }
 }
